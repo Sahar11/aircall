@@ -6,96 +6,50 @@ import {BsTelephoneInbound} from "react-icons/bs";
 import "../../css/style.css";
 import axios from "axios";
 
-const Inbox = () => {
-  const [archive, setArchive] = useState([]);
-  const [activities, setActivities] = useState([]);
-  const [tab, setTab] = useState(0);
-
-  useEffect(() => {
-    axios
-      .get(" https://aircall-job.herokuapp.com/activities")
-      .then(res => {
-        console.log(res.data);
-        // if(res.data.is_archived === false) {
-        setActivities(res.data);
-        // }
-      })
-      .catch((error) => console.log(`Error: ${error}`));
-  }, []);
-
-  // toggle Tabs
-  const toggleTab = (e) => {
-    e.preventDefault();
-    setTab(e.target.id);
-  };
+const Inbox = (calls) => {
+ 
   // to archive all calls
-  
-  const archiveAll = (e) => {
-    e.preventDefault();
-    // console.log(e.target.value)
-    activities.forEach((activity) => {
-      const headers = {
-        method: "POST",
-        url: `https://aircall-job.herokuapp.com/activities/${activity.id}`,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ is_archived: true }),
-      };
+  const id = calls.id;
+  console.log("callsP",calls.id)
+  //const stringId = id.toString();
 
-      fetch(
-        `https://aircall-job.herokuapp.com/activities/${activity.id}`,
-        headers
-      )
-        .then((res) => res.json())
-        .then((res) => {
-          console.log(res.data);
-          history.go(0);
-        });
-    });
+  const archiveAll = (e) => {
+   
+      axios.post(`https://aircall-job.herokuapp.com/activities/${id}`,{
+       is_archived:true,
+      });
+      window.location.reload();
   }
-  const filterItem = (id) => {
-    const archiveItem = activities.filter((newVal) => {
-      return newVal.is_archived === false;
+
+  const unarchive = () => {
+
+     axios.post(`https://aircall-job.herokuapp.com/activities/${id}`, {
+        is_archived: false,
     });
-    setItem(newItem);
-  };
+    window.location.reload();
+}
 
 
   return (
     <section className="background">
-      <div className="tabs">
-        <button id={0} className={tab == 0 ? "active" : ""} onClick={toggleTab}>
-          Inbox
-        </button>
-        <button id={1} className={tab == 1 ? "active" : ""} onClick={toggleTab}>
-          Archive
-        </button>
-      </div>
-
-      <button className="archiveAll" onClick={archiveAll}>
-        <BsArchive className="archiveIcon" /> &nbsp;&nbsp;Archive all calls
-      </button>
-
-      {activities.length > 0 ? (
-        activities.map((call) => {
-          return (
-            <div className="block btn btn-outline" key={call.id}>
-            
+      
+            <div className="block btn btn-outline" >
+            <div>
+                    <div className="archive" id={"store"+id}> Archive</div>
+                    <div className="unarchive" id={"discard"+id}> Unarchive</div>
+                </div>
              
-                {call.direction == "inbound" ? (
+                {calls.direction == "inbound" ? (
                   <BsTelephoneInbound className="inbound" />
                 ) : (
                   <BsTelephoneOutbound className="outbound"/>
                 )}
               
-              <div>{call.from} </div>
-              <div> {call.created_at} </div>
+              <div>from:{calls.from} </div>
+              <div> {calls.created_at} </div>
             
             </div>
-          );
-        })
-      ) : (
-        <div>All calls are archived</div>
-      )}
+      
     </section>
   );
 };

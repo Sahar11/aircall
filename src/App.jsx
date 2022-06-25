@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Inbox from './components/inbox/Inbox.jsx';
+import Activity from './Activity.jsx';
 import Header from './Header.jsx';
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
     <div className='container'>
       <Header/>
       
-      <div className="container-view"><Inbox /></div>
+      <div className="container-view"><Activity/></div>
     </div>
   );
 };
