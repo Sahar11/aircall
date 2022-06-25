@@ -18,9 +18,9 @@ const Activity = () => {
       .catch((error) => console.log(`Error: ${error}`));
   }, []);
 
-  const onReset = () => {
+  const Reset = () => {
     axios.get("https://aircall-job.herokuapp.com/reset");
-    window.location.reload(true);
+   // window.location.reload(true);
   };
   // toggle Tabs
   const toggleTab = (e) => {
@@ -42,23 +42,23 @@ const Activity = () => {
       {tab == 0 ? (
         <div>
           {activities
-            .filter((c) => {
-              if (c.is_archived == false) {
-                console.log("Calls",c)
-                return c;
+            .filter((call) => {
+              if (call.is_archived == false) {
+                console.log("Calls",call)
+                return call;
               }
             })
-            .map(c => {
-              console.log("Calling",c)
-              return  <Inbox key={c.id} calls={c} /> ;
+            .map(call => {
+              console.log("Calling",call)
+              return  <Inbox key={call.id} calls={call} /> ;
             })}
         </div>
       ) : (
         <div>
           {activities
-            .filter((c) => {
-              if (c.is_archived === true) {
-                return c;
+            .filter((call) => {
+              if (call.is_archived === true) {
+                return call;
               }
             })
             .map(c => {
@@ -68,6 +68,8 @@ const Activity = () => {
             })}
         </div>
       )}
+
+      <button className="resetBtn " onClick={Reset}>Reset</button>
     </div>
   );
 };
