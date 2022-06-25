@@ -15,7 +15,7 @@ const Inbox = () => {
     axios
       .get(" https://aircall-job.herokuapp.com/activities")
       .then(res => {
-        console.log(res.data.is_archived);
+        console.log(res.data);
         // if(res.data.is_archived === false) {
         setActivities(res.data);
         // }
@@ -52,6 +52,12 @@ const Inbox = () => {
         });
     });
   }
+  const filterItem = (id) => {
+    const archiveItem = activities.filter((newVal) => {
+      return newVal.is_archived === false;
+    });
+    setItem(newItem);
+  };
 
 
   return (
