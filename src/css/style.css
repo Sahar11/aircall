@@ -1,0 +1,50 @@
+/* .background {
+  height: 500px;
+  border-radius: 5px;
+  margin-bottom:100px ;
+} */
+
+.block {
+  padding:10px;
+  border-bottom: 1px solid rgb(157, 153, 153);
+ cursor: pointer;
+}
+
+.archiveAll {
+ 
+  padding: 10px;
+  margin: 15px 0;
+  width: 100%;
+  border-color:rgb(157, 153, 153);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.archiveIcon {
+ position: relative;
+ top:2px;
+}
+
+.inbound {
+color: cornflowerblue;
+}
+
+.outbound {
+  color: rgb(42, 196, 32);
+}
+
+.tabs {
+  overflow: hidden;
+
+}
+.tabs button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 8px; 
+}
+
+.tabs button.active {
+  background-color: #ccc;
+}
