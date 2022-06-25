@@ -15,8 +15,10 @@ const Inbox = () => {
     axios
       .get(" https://aircall-job.herokuapp.com/activities")
       .then(res => {
-        console.log(res.data);
+        console.log(res.data.is_archived);
+        // if(res.data.is_archived === false) {
         setActivities(res.data);
+        // }
       })
       .catch((error) => console.log(`Error: ${error}`));
   }, []);
