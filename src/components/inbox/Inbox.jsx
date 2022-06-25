@@ -35,8 +35,8 @@ const Inbox = (calls) => {
       
             <div className="block btn btn-outline" >
             <div>
-                    <div className="archive" id={"store"+id}> Archive</div>
-                    <div className="unarchive" id={"discard"+id}> Unarchive</div>
+                    <div className="archive" id={"archive"+id}> Archive</div>
+                    <div className="unarchive" id={"unarchive"+id}> Unarchive</div>
                 </div>
              
                 {calls.direction == "inbound" ? (
