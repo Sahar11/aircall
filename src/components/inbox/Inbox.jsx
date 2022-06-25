@@ -36,7 +36,7 @@ const Inbox = () => {
         method: "POST",
         url: `https://aircall-job.herokuapp.com/activities/${activity.id}`,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ is_archived: false }),
+        body: JSON.stringify({ is_archived: true }),
       };
 
       fetch(
